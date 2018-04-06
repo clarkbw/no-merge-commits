@@ -1,0 +1,26 @@
+{
+  "name": "no-merge-commits",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Bryan Clark <clarkbw@github.com> (http://github.com/clarkbw)",
+  "license": "ISC",
+  "repository": "https://github.com/clarkbw/no-merge-commits.git",
+  "scripts": {
+    "dev": "nodemon --exec \"npm start\"",
+    "start": "probot run ./index.js",
+    "lint": "prettier --write \"{.,docs,lib,test}/**/*.js\"",
+    "test": "jest"
+  },
+  "dependencies": {
+    "probot": "^6.0.0"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "nodemon": "^1.17.2",
+    "prettier": "1.11.1",
+    "smee-client": "^1.0.1"
+  },
+  "engines": {
+    "node": ">= 8.3.0"
+  }
+}
