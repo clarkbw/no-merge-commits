@@ -13,28 +13,26 @@ const defaults = {
 };
 
 module.exports = robot => {
-  robot.on("pull_request.opened", check);
-  robot.on("pull_request.synchronize", check);
+  robot.on(["pull_request.opened", "pull_request.synchronize"], check);
 
-  async function check(event, context) {
-    const github = await robot.auth(event.payload.installation.id);
-    const pr = event.payload.pull_request;
+  async function check(context) {
+    const github = await robot.auth(context.payload.installation.id);
+    const pr = context.payload.pull_request;
 
-    const compare = await github.repos.compareCommits(
+    const commits = await github.pullRequests.getCommits(
       context.repo({
-        base: pr.base.sha,
-        head: pr.head.sha
+        number: pr.number
       })
     );
 
-    const mergers = compare.commits.every(merge);
+    const mergers = commits.data.some(merge);
 
     const params = Object.assign(
       {
         sha: pr.head.sha,
         context: "No Merge Commits"
       },
-      mergers ? defaults.success : defaults.failure
+      !mergers ? defaults.success : defaults.failure
     );
 
     return github.repos.createStatus(context.repo(params));
