@@ -1,5 +1,7 @@
 # no-merge-commits
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/clarkbw/no-merge-commits.svg)](https://greenkeeper.io/)
+
 > a GitHub App built with [probot](https://github.com/probot/probot) that 
 
 ## Setup
